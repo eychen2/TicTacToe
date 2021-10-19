@@ -1,32 +1,16 @@
 #include <iostream>
 #include <string>
-#include <vector>
 #include <bits/stdc++.h>
+#include "Board.cpp"
 using namespace std;
-void printBoard(vector<vector<char>> &board)
-{
-    cout<<endl;
-    for(unsigned int i=0; i<board.size();++i)
-    {
-        cout<<board.size()-i-1<<"| ";
-        for(unsigned int j=0; j<board[i].size();++j)
-        {
-            cout<<board[i].at(j)<<" ";
-        }
-        cout<<endl;
-    }
-    cout<<"   ";
-    for(unsigned int i=0; i<2*board[0].size()-1;++i)
-        cout<<"-";
-    cout<<endl;
-    cout<<"   ";
-    for(unsigned int i=0; i<board[0].size();++i)
-        cout<<i <<" ";
-    cout<<endl;
-}
+enum Player{
+    X='X',O='O'
+}player;
 
 int main() {
     cout << "Hi, welcome to tic-tac-toe!" << endl;
+    int row;
+    int column;
     int rows=0;
     int columns=0;
     int k=INT_MAX;
@@ -36,8 +20,8 @@ int main() {
     cout<<"Type \"Person\" to play against a person and \"AI\" to play against an AI"<<endl;
     //Will work on AI functionality later, for now will only be dealing with player v player//
     bool gameOver=false;
-    bool playerTurn=true;
     bool AI=false;
+    player=X;
     cout<<"How many rows do you want to play with?"<<endl;
     cin>>rows;
     cout<<"How many columns do you want to play with?"<<endl;
@@ -53,14 +37,21 @@ int main() {
             cout << "The number of rows is " << rows << " and the number of columns is " << columns << endl;
         }
     }
-    vector<vector<char>> board;
-    for(unsigned int i=0; i<rows;++i)
-    {
-        vector<char> temp;
-        board.emplace_back(temp);
-        for(unsigned int j=0; j<columns;++j)
-            board[i].emplace_back('X');
-    }
-    printBoard(board);
+    Board board(rows,columns);
+    cout<<"The board is now set. Time to explain some of the rules."<<endl;
+
+    cout<<"The player who uses X will go first, if you are playing with a friend, decide amongst yourselves"
+          "who goes first. "<<endl;
+    //Will be implemented once the AI gets implemented
+    cout<<"If you are playing against an AI, we will randomly choose 0 or 1 for you to guess. If you get it right,"
+          "you go first. Get it wrong, and the AI goes first."<<endl;
+    cout<<"We will print out a blank board for you to see what it looks like"<<endl;
+    board.printBoard();
+    cout<<"To select where you want to play, write it in the form a,b where a is the x coordinate and b is the y coordinate"<<endl;
+    cout<<"As an example, say we are X and we say 0,0 then the board will look like this"<<endl;
+    board.addMove(0,0,player);
+    board.printBoard();
+    board.clear();
+    cout<<"I hope you understand the rules now! Have fun!"<<endl;
     return 0;
 }
