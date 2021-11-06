@@ -19,7 +19,7 @@ void Board::printBoard()
 {
     for(unsigned int i=0; i<board.size();++i)
     {
-        cout<<board.size()-i-1<<"| ";
+        cout<<"|";
         for(unsigned int j=0; j<board[i].size();++j)
         {
             cout<<board[i].at(j)<<" ";

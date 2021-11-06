@@ -53,5 +53,20 @@ int main() {
     board.printBoard();
     board.clear();
     cout<<"I hope you understand the rules now! Have fun!"<<endl;
+    while(!gameOver)
+    {
+        cout<<"It is player "<<to_string(player)<<"'s turn. Here is the board. What move would you like to play? Type \"stop\" to stop"<<endl;
+        board.printBoard();
+        cin>>cheese;
+        if(cheese=="stop")
+            break;
+        row=stoi(cheese.substr(0,cheese.find(",")));
+        column=stoi(cheese.substr(cheese.find(",")+1));
+        board.addMove(row,column,player);
+        if(player=X)
+            player=O;
+        else
+            player=X;
+    }
     return 0;
 }
